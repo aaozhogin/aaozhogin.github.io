@@ -7,39 +7,37 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
       background: #f4f6f8;
       height: 100vh;
-    }
-
-    .container {
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-
-    h1 {
-      color: #172B4D;
-    }
-
-    p {
-      color: #44546F;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Need Help?</h1>
-    <p>Click the button in the bottom-right corner to submit a support request.</p>
-  </div>
-
-  <!-- JIRA Issue Collector Script -->
-  <script 
+  <!-- Auto-open Jira Issue Collector on page load -->
+  <script
     data-jsd-embedded
     data-key="eaa7006a-b953-4c3b-bac5-5353620afb05"
     data-base-url="https://jsd-widget.atlassian.com"
     src="https://jsd-widget.atlassian.com/assets/embed.js">
+  </script>
+
+  <script>
+    // Wait for Jira widget to load, then open it automatically
+    window.addEventListener("message", function(event) {
+      if (event.origin === "https://jsd-widget.atlassian.com") {
+        if (event.data && event.data.type === "load") {
+          // Trigger form open
+          const widget = document.querySelector('[data-jsd-embedded]');
+          if (widget && typeof widget.jiraServiceDesk === 'object' && widget.jiraServiceDesk.show) {
+            widget.jiraServiceDesk.show();
+          } else {
+            // fallback for older script versions
+            window.postMessage({ type: "show" }, "*");
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>
