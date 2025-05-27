@@ -1,45 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Support Portal</title>
+  <meta charset="UTF-8" />
+  <title>Jira Support Widget</title>
   <style>
-    body {
-      background: #f4f6f8;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    html, body {
       margin: 0;
-    }
-    .button {
-      padding: 16px 32px;
-      font-size: 18px;
-      background-color: #0052CC;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .button:hover {
-      background-color: #0747a6;
+      padding: 0;
+      height: 100%;
     }
   </style>
 </head>
 <body>
-
-<button class="button" onclick="openPortal()">Open Jira Support Form</button>
-
-<script>
-  function openPortal() {
-    window.open(
-      'https://onmanylevels.atlassian.net/servicedesk/customer/portal/2/group/11/create/33',
-      '_blank',
-      'width=1000,height=800'
-    );
-  }
-</script>
-
+  <!-- This script adds the floating button in the bottom-right corner -->
+  <script 
+    data-jsd-embedded 
+    data-key="eaa7006a-b953-4c3b-bac5-5353620afb05" 
+    data-base-url="https://jsd-widget.atlassian.com"
+    src="https://jsd-widget.atlassian.com/assets/embed.js">
+  </script>
 </body>
 </html>
