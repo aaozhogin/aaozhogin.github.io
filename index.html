@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Support Request</title>
+  <title>Support Form</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: #f4f6f8;
+      background: #ffffff;
       height: 100vh;
       overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <!-- Auto-open Jira Issue Collector on page load -->
+  <!-- JIRA Issue Collector Script -->
   <script
     data-jsd-embedded
     data-key="eaa7006a-b953-4c3b-bac5-5353620afb05"
@@ -22,20 +22,11 @@
     src="https://jsd-widget.atlassian.com/assets/embed.js">
   </script>
 
+  <!-- Auto-trigger the widget to open on load -->
   <script>
-    // Wait for Jira widget to load, then open it automatically
     window.addEventListener("message", function(event) {
-      if (event.origin === "https://jsd-widget.atlassian.com") {
-        if (event.data && event.data.type === "load") {
-          // Trigger form open
-          const widget = document.querySelector('[data-jsd-embedded]');
-          if (widget && typeof widget.jiraServiceDesk === 'object' && widget.jiraServiceDesk.show) {
-            widget.jiraServiceDesk.show();
-          } else {
-            // fallback for older script versions
-            window.postMessage({ type: "show" }, "*");
-          }
-        }
+      if (event.origin === "https://jsd-widget.atlassian.com" && event.data?.type === "load") {
+        window.postMessage({ type: "show" }, "*");
       }
     });
   </script>
