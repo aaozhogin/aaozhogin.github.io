@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Support Form</title>
+  <title>Support</title>
   <style>
     html, body {
       margin: 0;
@@ -22,13 +22,15 @@
     src="https://jsd-widget.atlassian.com/assets/embed.js">
   </script>
 
-  <!-- Auto-trigger the widget to open on load -->
   <script>
-    window.addEventListener("message", function(event) {
-      if (event.origin === "https://jsd-widget.atlassian.com" && event.data?.type === "load") {
-        window.postMessage({ type: "show" }, "*");
+    // Poll until widget is ready, then trigger open
+    const interval = setInterval(() => {
+      const widgetApi = window?.JiraServiceDesk?.webWidget;
+      if (widgetApi && typeof widgetApi.open === 'function') {
+        widgetApi.open();
+        clearInterval(interval);
       }
-    });
+    }, 300);
   </script>
 </body>
 </html>
